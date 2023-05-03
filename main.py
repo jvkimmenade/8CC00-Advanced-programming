@@ -11,12 +11,14 @@ def read_intervals(filepath):
 list1 = read_intervals(set1_path)[0]
 list2 = read_intervals(set2_path)[0]
 
+
 def temp_func(line1, line2):
-    intervals1 = [tuple(line1[i:i+2]) for i in range(0, len(line1), 2)]
-    intervals2 = [tuple(line2[i:i+2]) for i in range(0, len(line2), 2)]
+    intervals1 = [tuple(line1[i:i + 2]) for i in range(0, len(line1), 2)]
+    intervals2 = [tuple(line2[i:i + 2]) for i in range(0, len(line2), 2)]
     return intervals1, intervals2
 
-int1, int2 = temp_func(list1,list2)
+
+int1, int2 = temp_func(list1, list2)
 print(int1)
 print(int2)
 
@@ -43,3 +45,8 @@ def count_overlaps(interval_list1, interval_list2):
 
     return count
 
+
+def calc_symmetric_similarity(list1, list2):
+    ls_12 = count_overlaps(list1, list2) / max(len(list1), len(list2))
+    ls_21 = count_overlaps(list2, list1) / max(len(list1), len(list2))
+    return (ls_12 + ls_21) / 2
