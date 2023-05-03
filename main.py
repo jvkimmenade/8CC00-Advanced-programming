@@ -46,7 +46,19 @@ def count_overlaps(interval_list1, interval_list2):
     return count
 
 
-def calc_symmetric_similarity(list1, list2):
+def calc_symmetric_list_similarity(list1, list2):
     ls_12 = count_overlaps(list1, list2) / max(len(list1), len(list2))
     ls_21 = count_overlaps(list2, list1) / max(len(list1), len(list2))
     return (ls_12 + ls_21) / 2
+
+
+def calc_set_similarity(set1, set2):
+    if len(set1) != len(set2):
+        print("ERROR: sets are not equal in length!")
+        return
+    else:
+        list_similarity_summation = 0
+        for list_index in range(len(set1)):
+            list_similarity_summation += calc_symmetric_list_similarity(set1[list_index], set2[list_index])
+
+    return list_similarity_summation / len(set1)
