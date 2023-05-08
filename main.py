@@ -5,11 +5,13 @@ set2_path = "sample_set2.txt"
 def read_intervals(filepath):
     with open(filepath, 'r') as f:
         intervals = [line.strip() for line in f.readlines()]
-    return [tuple(int(bound.strip('[], ')) for bound in interval.split(',')) for interval in intervals]
+        intervals = [tuple(int(bound.strip('[], ')) for bound in interval.split(',')) for interval in intervals]
+        intervals = [[tuple(line[i:i + 2]) for i in range(0, len(line), 2)] for line in intervals]
+    return intervals
 
 
-list1 = read_intervals(set1_path)[0]
-list2 = read_intervals(set2_path)[0]
+
+
 
 
 def temp_func(line1, line2):
@@ -18,9 +20,9 @@ def temp_func(line1, line2):
     return intervals1, intervals2
 
 
-int1, int2 = temp_func(list1, list2)
-print(int1)
-print(int2)
+# int1, int2 = temp_func(list1, list2)
+# print(int1)
+# print(int2)
 
 
 def has_overlap(I, L):
@@ -62,3 +64,6 @@ def calc_set_similarity(set1, set2):
             list_similarity_summation += calc_symmetric_list_similarity(set1[list_index], set2[list_index])
 
     return list_similarity_summation / len(set1)
+
+set1 = read_intervals(set1_path)
+set2 = read_intervals(set2_path)
